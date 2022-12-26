@@ -1,20 +1,17 @@
-import React, { useContext } from 'react'
-import { TodoContext } from '../../contexts/TodoContext'
+import React from "react";
+import { useDispatch } from "react-redux";
+import { removeTodo } from "../../stores/todos/todoActions";
 
-export const DeleteTodo = ({todoId}) => {
-
-    const {todos, setTodos} = useContext(TodoContext);
-
-    const onDeleteTodo = () =>{
-        const newTodos = [...todos];
-
-        const remainingTodos = newTodos.filter(x => x.id !== todoId);
-        setTodos(remainingTodos);
-
-    }
-
+export const DeleteTodo = ({ todoId }) => {
+  const dispatch = useDispatch();
 
   return (
-    <i className="fa fa-trash" aria-hidden="true" onClick={onDeleteTodo}> Delete</i>
-  )
-}
+    <i
+      className="fa fa-trash"
+      aria-hidden="true"
+      onClick={() => dispatch(removeTodo(todoId))}
+    >
+      Delete
+    </i>
+  );
+};

@@ -1,24 +1,15 @@
 import React, { useContext, useState } from "react";
-import { TodoContext } from "../../contexts/TodoContext";
+import { useDispatch } from "react-redux";
+import { editTodo } from "../../stores/todos/todoActions";
 import { DeleteTodo } from "./DeleteTodo";
 
 export const Todo = ({todo, onEditHandler}) => {
-
-  const {todos, setTodos} = useContext(TodoContext);
-
   const [isChecked, setIsChecked] = useState(todo.checked);
+  const dispatch = useDispatch();
 
   const onChangeCheck = () =>{
-    const newTodos = [...todos];
-
-    const updateTodo = newTodos.find(t => t.id === todo.id);
-    if(updateTodo)
-    {
-      updateTodo.checked = !todo.checked
-      setIsChecked(updateTodo.checked);
-    }
-
-    setTodos(newTodos);
+    dispatch(editTodo({...todo, checked: !todo.checked}))
+    setIsChecked(!todo.checked);
   }
 
   return (

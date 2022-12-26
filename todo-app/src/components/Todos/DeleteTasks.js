@@ -1,20 +1,17 @@
-import React, { useContext } from "react";
-import { TodoContext } from "../../contexts/TodoContext";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { removeAllTodo, removeDoneTodo } from "../../stores/todos/todoActions";
 
 export const DeleteTasks = () => {
 
-    const {todos, setTodos} = useContext(TodoContext)
+    const dispatch = useDispatch();
 
     const deleteDoneTasks = () =>{
-        const newTodos = [...todos];
-
-        const remainingTodos = newTodos.filter(t => !t.checked);
-        setTodos(remainingTodos);
-
+        dispatch(removeDoneTodo())
     }
 
     const deleteAllTasks = () =>{
-        setTodos([])
+        dispatch(removeAllTodo())
     }
 
   return (

@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
-import { TodoContext } from "../../contexts/TodoContext";
+import { useDispatch, useSelector } from "react-redux";
+import { editTodo } from "../../stores/todos/todoActions";
 
 export const EditTodo = ({todoId, successfulEdit }) => {
-
-    const {todos, setTodos} = useContext(TodoContext);
-    const currentTodo = todos.find(t => t.id === todoId);
+    const currentTodo = useSelector(state => state.find(t => t.id === todoId));
+    const dispatch = useDispatch();
 
     const [input, setInput] = useState(currentTodo.title)
 
@@ -13,17 +13,9 @@ export const EditTodo = ({todoId, successfulEdit }) => {
         if(input === '')
             return;
         
-        const newTodos = [...todos];
-        const updateTodo = newTodos.find(t => t.id === todoId);
-        if(updateTodo)
-        {
-            updateTodo.title = input;
-            setTodos(newTodos);
-            setInput('')
-            successfulEdit();
-        }
-
-        
+        dispatch(editTodo({...currentTodo, title: input}));
+        setInput("")
+        successfulEdit();
     }
 
   return (

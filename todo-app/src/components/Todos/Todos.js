@@ -1,12 +1,13 @@
-import React, { useContext, useState } from "react";
-import { TodoContext } from "../../contexts/TodoContext";
+import React, { useState } from "react";
+import { useSelector } from 'react-redux'
 import { CreateTodo } from "./CreateTodo";
 import { DeleteTasks } from "./DeleteTasks";
 import { EditTodo } from "./EditTodo";
 import { Todo } from "./Todo";
 
 export const Todos = () => {
-  const { todos } = useContext(TodoContext);
+
+  const todos = useSelector(state => state);
 
   const [create, setCreate] = useState(true);
   const [id, setId] = useState("");
@@ -19,6 +20,7 @@ export const Todos = () => {
   const successfulEdit = () =>{
     setCreate(true);
   }
+
 
   return (
     <div>
@@ -33,7 +35,7 @@ export const Todos = () => {
         )}
       </section>
 
-      <DeleteTasks />
+      <DeleteTasks  />
     </div>
   );
 };
