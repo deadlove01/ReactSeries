@@ -10,6 +10,7 @@ public static class InfraSetup
         services.AddDbContext<EcomContext>(op =>
         {
             op.UseSqlServer(configuration.GetConnectionString("EcomContext"));
+            op.EnableSensitiveDataLogging();
         });
         
         return services;

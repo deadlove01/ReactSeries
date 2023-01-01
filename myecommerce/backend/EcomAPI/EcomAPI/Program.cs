@@ -10,6 +10,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 var configuration = builder.Configuration;
 builder.Services.AddServices(configuration);
+builder.Services.AddInfras(configuration);
 
 var app = builder.Build();
 
