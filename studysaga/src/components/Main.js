@@ -2,6 +2,7 @@ import React from 'react'
 import {useDispatch} from 'react-redux'
 import uuid from 'react-uuid';
 import {addCartAction, clearCartAction, removeCartAction} from '../redux/action';
+import { getProductList } from '../redux/product/productAction';
 
 export const Main = () => {
 
@@ -31,6 +32,10 @@ export const Main = () => {
             <button onClick={
                 () => dispatch(clearCartAction())
             }>clear Cart</button>
+
+<button onClick={
+                () => dispatch(getProductList())
+            }>get product list</button>
         </div>
     )
 }
