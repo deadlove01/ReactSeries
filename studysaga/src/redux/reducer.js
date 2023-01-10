@@ -10,9 +10,9 @@ export const CartReducer = (data = cartState, action) =>{
             return [...data, action.payload];
         case REMOVE_FROM_CART:
             console.log("action type REMOVE_FROM_CART")
-            const newData = [...data];
+            const newData = data.filter(x => x.id !== action.payload)
             console.log(newData)
-            return newData.slice(0, -1);
+            return [...newData];
             case EMPTY_CART:
                 console.log("action clear cart");
                 data = [];

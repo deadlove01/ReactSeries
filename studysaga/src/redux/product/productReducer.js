@@ -10,7 +10,7 @@ export const productReducer = (data = productData, action) =>
     {
         case PRODUCT_LIST_SUCCEED:
             console.log("get data succeed")
-            return [...data];
+            return [...action.data];
 
         default:
             return data;

@@ -10,10 +10,11 @@ export const addCartAction = (payload) =>{
 }
 
 
-export const removeCartAction = () =>{
+export const removeCartAction = (payload) =>{
     console.log("call addCartAction")
     return {
-        type: REMOVE_FROM_CART
+        type: REMOVE_FROM_CART,
+        payload: payload
     }
 }
 

@@ -1,8 +1,8 @@
-import React from 'react'
-import {useDispatch} from 'react-redux'
+import React, { useEffect } from 'react'
+import {useDispatch, useSelector} from 'react-redux'
 import uuid from 'react-uuid';
 import {addCartAction, clearCartAction, removeCartAction} from '../redux/action';
-import { getProductList } from '../redux/product/productAction';
+import {getProductList} from '../redux/product/productAction';
 
 export const Main = () => {
 
@@ -14,28 +14,54 @@ export const Main = () => {
         category: "bestseller"
     }
 
-    console.log(product);
+    const productData = useSelector((state)=> state.ProductData);
+    
+    useEffect(() => {
+        dispatch(getProductList());
+      
+    }, [])
+    
 
     return (
-        <div className="">
-            <button onClick={
-                () => dispatch(addCartAction({
-                    ... product,
-                    id: uuid()
-                }))
-            }>Add to Cart</button>
+        <div >
+            <div>
+                <button onClick={
+                    () => dispatch(addCartAction({
+                        ... product,
+                        id: uuid()
+                    }))
+                }>Add to Cart</button>
+            </div>
+            <div>
+                <button onClick={
+                    () => dispatch(removeCartAction())
+                }>Remove item from Cart</button>
+            </div>
+            <div>
+                <button onClick={
+                    () => dispatch(clearCartAction())
+                }>clear Cart</button>
+            </div>
+                
+            <div className='product-container'>
+                {
+                    productData && productData.map((item)=> {
+                        return (
+                        <div className='product-item' key={item.id}>
+                            <img src={item.thumbnail} alt="" />
+                            <div>Name: {item.item} </div>
+                            <div>Rating: {item.rating} </div>
+                            <div>Price: {item.price} </div>
+                            <div>Stock: {item.stock} </div>
+                            <div>
+                                <button onClick={() => dispatch(addCartAction(item))}>Add To Cart</button>
+                                <button onClick={() => dispatch(removeCartAction(item.id))}>Remove From Cart</button>
+                            </div>
+                        </div>)
+                })
+                }
+            </div>
 
-            <button onClick={
-                () => dispatch(removeCartAction())
-            }>Remove item from Cart</button>
-
-            <button onClick={
-                () => dispatch(clearCartAction())
-            }>clear Cart</button>
-
-<button onClick={
-                () => dispatch(getProductList())
-            }>get product list</button>
         </div>
     )
 }
