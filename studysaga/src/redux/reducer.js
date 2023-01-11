@@ -2,7 +2,6 @@ import { ADD_TO_CART, EMPTY_CART, REMOVE_FROM_CART } from "./actionTypes"
 import { cartState } from "./initialState"
 
 export const CartReducer = (data = cartState, action) =>{
-    console.log("call CartReducer")
     switch(action.type)
     {
         case ADD_TO_CART:

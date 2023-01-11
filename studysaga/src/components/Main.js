@@ -7,13 +7,6 @@ import {getProductList} from '../redux/product/productAction';
 export const Main = () => {
 
     const dispatch = useDispatch();
-    const product = {
-        id: undefined,
-        name: "product 1",
-        price: 50,
-        category: "bestseller"
-    }
-
     const productData = useSelector((state)=> state.ProductData);
     
     useEffect(() => {
@@ -24,19 +17,6 @@ export const Main = () => {
 
     return (
         <div >
-            <div>
-                <button onClick={
-                    () => dispatch(addCartAction({
-                        ... product,
-                        id: uuid()
-                    }))
-                }>Add to Cart</button>
-            </div>
-            <div>
-                <button onClick={
-                    () => dispatch(removeCartAction())
-                }>Remove item from Cart</button>
-            </div>
             <div>
                 <button onClick={
                     () => dispatch(clearCartAction())
