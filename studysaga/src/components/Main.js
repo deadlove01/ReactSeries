@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import uuid from 'react-uuid';
 import {addCartAction, clearCartAction, removeCartAction} from '../redux/action';
-import {getProductList} from '../redux/product/productAction';
+import {addNewItemToCartAction, getProductList, subtractProduct} from '../redux/product/productAction';
 
 export const Main = () => {
 
@@ -30,11 +30,15 @@ export const Main = () => {
                         <div className='product-item' key={item.id}>
                             <img src={item.thumbnail} alt="" />
                             <div>Name: {item.item} </div>
-                            <div>Rating: {item.rating} </div>
+                            <div>Stock: {item.rating} </div>
                             <div>Price: {item.price} </div>
                             <div>Stock: {item.stock} </div>
                             <div>
-                                <button onClick={() => dispatch(addCartAction(item))}>Add To Cart</button>
+                                <button onClick={() => {
+                                    dispatch(addNewItemToCartAction(item.id));
+                                    // dispatch(addCartAction(item));
+                                    // dispatch(subtractProduct(item.id));
+                                }}>Add To Cart</button>
                                 <button onClick={() => dispatch(removeCartAction(item.id))}>Remove From Cart</button>
                             </div>
                         </div>)

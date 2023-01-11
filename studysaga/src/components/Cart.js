@@ -6,7 +6,7 @@ export const Cart = () => {
   const cartData = useSelector((state) => state.CartData);
   let amount =
     cartData.length &&
-    cartData.map((item) => item.price).reduce((prev, next) => prev + next);
+    cartData.map((item) => item.price * item.stock).reduce((prev, next) => prev + next);
   console.log(amount);
 
   return (
@@ -18,7 +18,7 @@ export const Cart = () => {
           <thead>
             <tr>
               <td>Name</td>
-              <td>rating</td>
+              <td>Item Count</td>
               <td>Price</td>
               <td>Brand</td>
               <td>Category</td>
@@ -29,7 +29,7 @@ export const Cart = () => {
               cartData.map((item, i) => (
                 <tr key={i}>
                   <td>{item.title}</td>
-                  <td>{item.rating}</td>
+                  <td>{item.stock}</td>
                   <td>{item.price}</td>
                   <td>{item.brand}</td>
                   <td>{item.category}</td>

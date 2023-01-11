@@ -6,7 +6,16 @@ export const CartReducer = (data = cartState, action) =>{
     {
         case ADD_TO_CART:
             console.log("action type add to cart")
-            return [...data, action.payload];
+            let insertedData = [...data];
+            let existed = insertedData.find(x => x.id === action.payload.id);
+            if(existed)
+            {
+                existed.stock++;
+            }else
+            {
+                insertedData.push({...action.payload, stock: 1});
+            }
+            return insertedData;
         case REMOVE_FROM_CART:
             console.log("action type REMOVE_FROM_CART")
             const newData = data.filter(x => x.id !== action.payload)
